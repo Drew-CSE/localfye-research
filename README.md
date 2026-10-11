@@ -1,56 +1,136 @@
-# Welcome to your Expo app 👋
+# Localfye Research Prototype
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Localfye is a tourist-focused application for discovering local hidden gems and lesser-known places.
 
-## Get started
+This repository contains a research prototype built with React Native, Expo, and TypeScript. It explores navigation, interactive maps, location access, and adding Gems before those features are developed in the full application.
 
-1. Install dependencies
+## Research Objective
 
-   ```bash
-   npm install
-   ```
+The goal of this project is to investigate how React Native and Expo can support Localfye's core functionality.
 
-2. Start the app
+I originally wanted to explore the application's functionality on an iPhone using the Expo Go app. For the demonstration video, however, running the prototype in a web browser made more sense because it was easier to record and demonstrate without relying on a reliable Wi-Fi connection between my computer and phone.
 
-   ```bash
-   npx expo start
-   ```
+The current map implementation runs in a **web browser** using Leaflet. It demonstrates browser map and location functionality; native mobile map functionality remains a future research step.
 
-In the output, you'll find options to open the app in a
+## Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **Prototype login:** Enter a username and password, then navigate to Home. The username appears in the navigation header.
+- **Interactive map:** Pan and zoom an OpenStreetMap map.
+- **Current location:** Request browser location permission and center the map on the returned coordinates.
+- **Sample Gems:** Display Maple Mug Cafe and Corner Grill near the map center.
+- **Gem details:** Click a marker to open a bottom panel with its name, category, description, price, location, and hours.
+- **Add Gem:** Complete a form to create a labeled marker with your own information.
+- **Basic validation:** Required fields must contain more than whitespace.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Technologies Used
 
-## Get a fresh project
+| Technology | Purpose |
+|---|---|
+| React Native | Application components and layout |
+| Expo | Development tooling and application framework |
+| TypeScript | Type checking |
+| Expo Router | Navigation between screens |
+| React Native Web | Browser support |
+| Leaflet | Interactive browser map and markers |
+| OpenStreetMap | Map tiles |
+| Browser Geolocation API | Current location lookup |
+| CSS | Browser map, marker, and panel styling |
 
-When you're ready, run:
+## Getting Started
+
+### Requirements
+
+- Node.js compatible with the project's Expo SDK
+- npm
+- A modern web browser
+- Internet access for installing dependencies and loading map tiles
+
+### Installation
+
+Clone the repository, open its folder in a terminal, and install dependencies:
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Run in a Browser
 
-### Other setup steps
+```bash
+npm run web
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Open the local URL shown in the terminal. Use the `localhost` address when testing location access.
 
-## Learn more
+### Run with Expo
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+You can open the application in Expo Go to test the login and navigation screens. The current map is implemented for the browser; the mobile version displays a placeholder.
 
-## Join the community
+## Trying the Prototype
 
-Join our community of developers creating universal apps.
+1. Enter a username and tap **Login**. The password is not checked.
+2. Allow browser location access when prompted.
+3. Pan or zoom the map and click either sample Gem.
+4. Click **+ Add Gem**.
+5. Enter a name, description, category, price range, location, and hours.
+6. Click **Submit** to add a marker.
+7. Click the new marker to view the information you entered.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+If location access is unavailable, denied, or times out, the application displays a message and keeps its default map centered on Manhattan.
+
+## Project Structure
+
+```text
+src/
+├── app/
+│   ├── _layout.tsx       # Navigation stack and screen headers
+│   ├── index.tsx         # Prototype login screen
+│   └── home.tsx          # Home screen with username header and map
+└── components/
+    ├── gem-map.web.tsx   # Browser map, location, markers, and Add Gem form
+    ├── gem-map.tsx       # Mobile map placeholder
+    └── gem-map.css       # Browser map and form styling
+```
+
+## Prototype Limitations
+
+- **No authentication:** Login only passes the username to Home.
+- **No database:** Added Gems remain in memory and are lost when the page refreshes or the map screen unmounts.
+- **Demo locations:** Sample Gems appear near the detected location or default map center.
+- **No address lookup:** Submitted Gems receive fixed demo coordinates. Entering an address changes the displayed details, not the marker's position.
+- **Browser map only:** Native mobile maps have not been implemented.
+- **Location accuracy varies:** Browser coordinates may be approximate.
+- **Internet is required:** Map tiles load from OpenStreetMap.
+
+## Development Checks
+
+Run lint:
+
+```bash
+npm run lint
+```
+
+Run TypeScript checks:
+
+```bash
+npx tsc --noEmit
+```
+
+Build the web version:
+
+```bash
+npx expo export --platform web
+```
+
+## Future Application
+
+The full Localfye application may include user accounts, saved Gems, reviews, photos, Swag Score, verification, and database persistence.
+
+Supabase, PostgreSQL, Supabase Auth, and Supabase Storage are possible technologies for that future work. These features and services are outside the scope of this prototype.
+
+## Map Attribution
+
+Map data is provided by [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). The browser map uses [Leaflet](https://leafletjs.com/).
