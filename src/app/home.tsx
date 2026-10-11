@@ -1,5 +1,6 @@
-import { useLocalSearchParams } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Stack, useLocalSearchParams } from "expo-router";
+import { StyleSheet } from "react-native";
+import GemMap from "@/components/gem-map";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
@@ -9,10 +10,8 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={["left", "right", "bottom"]}>
-      <Text style={styles.username}>{displayUsername?.trim() || "Guest"}</Text>
-      <View style={styles.content}>
-        <Text>Welcome to Localfye!</Text>
-      </View>
+      <Stack.Screen options={{ title: displayUsername?.trim() || "Guest" }} />
+      <GemMap />
     </SafeAreaView>
   );
 }
@@ -22,15 +21,5 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     backgroundColor: "#ffffff",
-  },
-  username: {
-    fontSize: 24,
-    fontWeight: "600",
-    color: "#222222",
-  },
-  content: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

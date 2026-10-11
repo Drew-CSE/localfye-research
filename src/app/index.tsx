@@ -34,6 +34,7 @@ export default function LoginScreen() {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.form}>
+            <Text style={styles.title}>Localfye</Text>
             <Text style={styles.label}>Username</Text>
             <TextInput
               accessibilityLabel="Username"
@@ -83,6 +84,13 @@ const styles = StyleSheet.create({
   form: {
     width: "100%",
     maxWidth: 400,
+  },
+  title: {
+    color: "#222222",
+    fontSize: 32,
+    fontWeight: "700",
+    textAlign: "center",
+    marginBottom: 32,
   },
   label: {
     color: "#222222",
